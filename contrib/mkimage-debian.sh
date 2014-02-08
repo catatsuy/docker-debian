@@ -36,7 +36,7 @@ cd "$target"
 img=$(sudo tar -c . | docker import -)
 
 # tag suite
-docker tag $img $repo $suite
+docker tag $img $repo:$suite
 
 # test the image
 docker run -i -t $repo:$suite echo success
@@ -47,7 +47,7 @@ if [ "$suite" = "$stableSuite" -o "$suite" = 'stable' ]; then
 	
 	# tag the specific debian release version
 	ver=$(docker run $repo:$suite cat /etc/debian_version)
-	docker tag $img $repo $ver
+	docker tag $img $repo:$ver
 fi
 
 # cleanup
